@@ -8,14 +8,35 @@ length = len(df)
 app = Flask(__name__)
 
 @app.route('/')
+@app.route('/main')
 def main():
-	user = { 'nickname': 'COSMOS' } # fake user
-	return render_template("covidlp.html",
-       title = 'Home',
-       user = user)
-def main():
-    return render_template('main.html', length=length,
-                           dataframe=df.to_html())
+    user = { 'nickname': 'COSMOS' } # fake user
+    return render_template('main.html',
+                            user = { 'nickname': 'COSMOS' },
+                            length=length,
+                            dataframe=df.to_html())
+
+@app.route('/index')
+def index():
+	return render_template("index.html",
+       title = 'Index')
+
+@app.route('/input')
+def input():
+    return render_template("input.html",
+        title = 'Input')
+
+@app.route('/output')
+def output():
+    return render_template("output.html",
+        title = 'Output')
+
+@app.route('/data')
+def data():
+    return render_template("data.html",
+        title = 'Data')
+
+
 
 
 if __name__ == '__main__':
