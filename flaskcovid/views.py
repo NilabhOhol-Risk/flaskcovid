@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 import pandas as pd
 import psycopg2
-from .a_Model import ModelIt
 app = Flask(__name__)
 
 @app.route('/')

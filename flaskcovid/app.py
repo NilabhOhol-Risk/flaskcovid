@@ -47,7 +47,5 @@ def data():
         title = 'Data')
 
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
