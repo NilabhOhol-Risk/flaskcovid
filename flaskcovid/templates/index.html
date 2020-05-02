@@ -1,6 +1,8 @@
-<html>
- <head>
- 	<meta charset="utf-8">
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -8,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Title</title>
+    <title>{{title}}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -28,327 +30,58 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <title>{{title}} - microblog</title>
-    <style>
-		table, th, td {
-    	border: 1px solid black;
-		}
-	</style>
-	<style>
-		p.ex1 {
-    	margin-bottom: 25px;
-			}
-	</style>
- </head>
+  </head>
+
   <body>
 
- 	<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('main') }}">LP Framework for COVID-19</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('main') }}">Main</a></li>
+            <li><a href="{{ url_for('index') }}">Index</a></li>
+            <li><a href="{{ url_for('input') }}">Input</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
+    <div class="container">
       <div class="starter-template">
-        <h1><br>header1</h1>
-        <p><font size="4"> text</font></p>
-        <div class="container">
-        	<div class="row">
-    		<!--<div class="col-6-9">
-        	<img src="/static/NilabhOhol.JPG" alt="NilabhOhol" width="100" height="100" align="right">
-        </div> --></div>
-        </div>
-
-        <div class="container">
-        by <a href="https://www.linkedin.com/in/nilabhohol/">Nilabh Ohol</a>, Insight Health Data Science Fellow, Boston Summer Session 2018
-        </div>
+          <h2>Instructions</h2>
+          <p class="lead">Enter instructions here..</p>
+          <a href="{{ url_for('input') }}"><button type="button" class="btn btn-primary">Continue</button></a>
+      </div>
 
 
-        <br>
-        <br>
-        <div class="container">
-        	<h3>Problem</h3>
-        	<p style="text-align: justify">Approximately 1 in 8 American women will develop invasive breast cancer. The five-year survival rate when the tumor is localized within the breast is 99% but it reduces to only 27% once the tumor metastasizes. The survival plot below shows that the probability of survival for patients in stages 3 and 4 reduces significantly compared to stages 1 and 2. Therefore, there is significant value in early detection of breast cancer. Unfortunately, over 80% of cases are not diagnosed until later stages. Most popular detection methods rely on symptom-based diagnosis however, most women are asymptomatic until later stages. Analyzing gene expression profile can be a powerful approach to identify subtle but consequential genetic players that mark the initiation of breast cancer. Currently, gene expression tests contain limited genes with strong link to breast cancer and can only be used for therapeutic decision making. This blog discusses an innovative machine learning approach to identify novel genetic signature for early breast cancer detection. It also includes a case example and explains how this framework could be used to analyze gene expression profile of breast cancer samples spread across stage 1 to stage 4. The goal is achieved using the following steps:
-			<br>
-			<br>
-			<div class="container">
-				<figure>
-					<img src="/static/BC_Survival.png" alt="BreastCancerInfo2" width="300" height="300" align="right">
-					<!---------<figcaption>Breast Cancer Survival Probabilities in Different Stages</figcaption>----------->
-				</figure>
-			</div>
-			<ul>
-  				<li style="text-align: justify">Combine genetic and clinical information of patients who are in a certain stage of breast cancer and fit a machine learning algorithm to identify genetic signature, which are significant for classifying a patient into one of the cancer stage. By eliminating data for patients without cancer in the study, the framework will identify the 'subtle' genetic signatures that are unique to each stage.</li>
-  				<li style="text-align: justify">he framework is divided into two steps. The first step reduces the sparsity of the data for better prediction by using support vector machine with L1 regularization. The next step identifies significant features in each stage using XGBoost.</li>
-  				<li style="text-align: justify">The selected genes in every stage are then further assessed based on their known biological function and clinical relevance.</li>
-			</ul></p>
-        </div>
+    </div> <!-- /.container-->
 
-        <div class="container">
-        	<h3>Data</h3>
-        		<p style="text-align: justify"><font size="3">The data was scraped and engineered from multiple open sources such as the National Institute of Health database. A majority of data engineering was done by a colleague resulting in two separate datasets. One of the datasets contain patient's clinical information such as gender, type of disease and disease stage. The other dataset contain their gene expression profile. The two datasets were linked using the patient's case ID where each case ID unique to each patient. The final dataset, was a highly sparse matrix with 1100 observations and approximately 58,000 features including the clinical and the gene expression data.
-        		<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#LeanMoreData">
-  					Learn More
-					</button>
-						</p>
-				<!-- Modal -->
-				<div class="modal fade" id="LeanMoreData" tabindex="-1" role="dialog" aria-labelledby="LeanMoreDataTitle" aria-hidden="true">
-  					<div class="modal-dialog modal-dialog-centered" role="document">
-    					<div class="modal-content">
-      						<div class="modal-header">
-        						<h5 class="modal-title" id="LearnMoreDataTitle">Data Description</h5>
-        						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          						<span aria-hidden="true">&times;</span>
-        						</button>
-      						</div>
-      							<div class="modal-body">
-      								Table below shows an example of the <b>clincal data</b> used in the study.
-      								<table style="width:85%" align="center">
-  										<tr>
-   											<th align="center">Case ID</th>
-    										<th>Gender</th>
-    										<th>Disease Type</th>
-    										<th>Disease Stage</th>
-  											</tr>
-  										<tr>
-    										<td>PID1</td>
-    										<td>Female</td>
-    										<td>Breast</td>
-    										<td>Stage 1</td>
-  										</tr>
-  										<tr>
-    										<td>PID2</td>
-    										<td>Female</td>
-    										<td>Breast</td>
-    										<td>Stage 2</td>
-  										</tr>
-  										<tr>
-    										<td>PID3</td>
-    										<td>Female</td>
-    										<td>Breast</td>
-    										<td>Stage 2</td>
-  										</tr>
-									</table>
-									<br>
-									<div>
-									The gene expression data consists of the following fetures:
-									<ul>
-  										<li style="text-align: justify"><b>Gene Ensembl ID</b> is a database of gene IDs which, unlike gene names, do not change as a result of improvements in scientific knowledge. Example: Ensembl Gene ID <b>ENSG00000186439</b> represents a protein coding gene TRDN.</li>
-  										<li style="text-align: justify"><b>Gene Expression value</b> for every gene, which is mapped on to its Ensembl ID. In the field of molecular biology, gene expression profiling is the measurement of the activity of thousands of genes at once to create a global picture of cellular function. These profiles can, for example, distinguish between cells that are actively dividing, or show how the cells react to a particular treatment. </li>
-  										<li style="text-align: justify">The genes in the data are expressed in <b>R</b>eads <b>P</b>er <b>K</b>ilo <b>M</b>inutes, <b>RPKM</b>. These expression values range from 1000 RPKM to 1e6 RPKM.</li>
-									</ul>
-									</div>
-      							</div>
-      								<div class="modal-footer">
-        								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      								</div>
-
-    					</div>
-  					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-1-6">
-        					<img src="/static/DataExp1.png" alt="EDA1" width="500" height="300">
-        				</div>
-        				<div class="col-7-12">
-        					<img src="/static/DataDist_Final.png" alt="FinalData" width="500" height="300" align="right">
-        				</div>
-        			</div>
-        		</div>
-        		<div class="container">
-        			<p style="text-align: justify"><br>Figures above show results of exploratory data analysis. The variable in the data representing cancer stage was named 'disease_stage' and is the response variable, y, used in this framework. 'disease_stage' is a categorical variable consisting of 11 different categories where every stage of cancer is further divided into a sub-stage. The plot on the right below shows the raw distribution of all the categories of 'disease_stage' ordered in their decreasing frequency of appearance in the data. As can be inferred from this plot the distribution of cancer stages is highly skewed. As a result the sub groups under each stage were combined to form four main categories, Stage I, Stage II, Stage III and Stage IV. On further inspection of the data it was seen that number of patients in stage 4 were very low. For every one patient in the database with Stage IV cancer there were 80 other patients who were in one of the other three stages. Under the assumption that the patients in cancer stage III and IV have a very low probability of survival, these stages were combined to reduce imbalance in the data. the final response variable, 'disease_stage', is a three-level categorical variable with Stage I, Stage II and Stage III.</font><p>
-        		</div>
-        </div>
-
-        <div class="container">
-        	<h3>Analysis and Tools</h3>
-        	<p style="text-align: justify"><br> The figure below explains the work flow adopted for this project.</p>
-        	<img src="/static/WorkFlow_new.png" alt="Workflow" width="980" height="500" align="center">
-
-        	<h4><br>Data Preprocessing</h4>
-        	<p style="text-align: justify"> As summarized above, the data was scraped from NIH website and curated into postgres database. The clinical and genetic datasets were extracted from this data base and merged into a single dataset using patient's unique ID. The final dataset consisted of 1100 unique patients with their genetic and cancer stage information. The stages of cancer used for this study are I, II and III as explained above.</p>
-        	<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DataPreprocess">
-  			Learn More
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="DataPreprocess"" tabindex="-1" role="dialog" aria-labelledby="DataPreprocessTitle" aria-hidden="true">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<h5 class="modal-title" id="exampleModalLongTitle">Data Preprocessing</h5>
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          					<span aria-hidden="true">&times;</span>
-        				</button>
-      				</div>
-      					<div class="modal-body">
-        					<img src="/static/DataProcess1.png" alt="Workflow" width="450" height="250" align="center">
-        					<h6>Feature Space Engineering</h6>
-        					<p style="text-align: justify">The data was scraped from NIH website and curated into two raw datasets. The gene expression data was highly sparse and used as the input matrix. Data extracted from the clinical dataset was the patient's cancer stage information. Other variables were dropped for the analysis since they do not add any significance to the machine learning algorithm. For example, 2 out of 1100 patients were male and the rest were female. With the objective to identify genetic signatures in every stage of cancer and under the assumption of homogeneity across patient samples in every stage of cancer, I decided to drop these variables. The response variable, cancer stage, had three main categories; stage 1, stage 2 and stage 3. Since cancer progression has to be taken into consideration, the response is treated as ordinal. This was done using Python code and packages <code>numpy</code> and <code>pandas</code></p>
-
-        					<h6>One Hot Encoding</h6>
-        					In order to identify significant features in every stage of cancer, I decided to run three different models, one for each stage.
-        					<ul>
-  								<li style="text-align: justify"><b>Model 1</b> classifies patients with stage 1 breast cancer from those in stages 2 and 3.</li>
-  								<li style="text-align: justify"><b>Model 2</b> classifies patients with stage 3 breast cancer from those in stages 1 and 2.</li>
-  								<li style="text-align: justify"><b>Model 3</b> classifies patients with stage 2 breast cancer from those in stage 1.</li>
-							</ul>
-							This approach enables to identify significant genetic signature in each stage taking cancer progression into account. To perform this step, one hot encoding was applied to the response variable using python module <code>sklearn.preprocessing</code>.
-
-							<h6>Validation</h6>
-        					<p style="text-align: justify">The data was split into training and testing set using module <code>sklearn.crossvalidation</code>. The <code>train_test_split's</code> <code>stratify</code> option is used to maintain the imbalance ratio in training and testing data. Stages 1 and 3 have a significant amount of imbalance and is handled by upsampling the minority class. Stage 2 had an imbalance ratio of 1.5:1 and thus no up or down sampling was applied. The sampling technique prevents the algorithm to always predict the majority class, in order words, reduces bias in prediction.</p>
-      					</div>
-      				<div class="modal-footer">
-
-      				</div>
-    			</div>
-  			</div>
-		</div>
-
-        	<h4><br>Removing Sparse Features</h4>
-        	<p style="text-align: justify">The first step in the framework reduces the sparseness of the data. <b>Support vector machine with L1 regularization</b> was implemented which reduced the number of features from 58000 to 15000. To improve the model performance and reduce the false negative rates, 5 fold cross validation was performed. The non-sparse features were used in the next step of modelling.</p>
-        	<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SVM">
-  			Learn More
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="SVM"" tabindex="-1" role="dialog" aria-labelledby="SVMTitle" aria-hidden="true">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<h5 class="modal-title" id="exampleModalLongTitle">Removing Sparse Features</h5>
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          					<span aria-hidden="true">&times;</span>
-        				</button>
-      				</div>
-      					<div class="modal-body">
-        					<h6>Support Vector Machine with L1 Regularization</h6>
-        					<img src="/static/SVM.png" alt="SVM" width="450" height="250" align="center">
-        					<p style="text-align: justify">The first step of the framework involves removing the noise from the data by reducing the sparsity of the input matrix. Since, the response variable is one hot encoded, a binary classification is implemented for all the three models. Support vector machine with linear kernel is used as the classifier which maps the high dimensional data to a two dimensional space. The linear classifier forms a decision boundary to maximize the separation of the two classes in the response variable. Python module <code>sklearn.svc</code> is used to achieve this.</p>
-        					<p style="text-align: justify">L1 regularization is used over the default setting of L2 penalty since the L1 parameter weights the decision function of the classifier using l1-norm drawing the coefficients on the sparse matrix to zero. Hyper-parameter tuning for support vector machines is relatively straightforward and  requires less computational time which was another motivation for using this approach. This is done using <code>GridSearch</code> function in <code>sklearn</code> module.</p>
-        					<p style="text-align: justify">Support vector machines also resulted in improved performance over other algorithms such as random forest classifier and logistic regression with L1 regularization.</p>
-      					</div>
-      				<div class="modal-footer">
-
-      				</div>
-    			</div>
-  			</div>
-		</div>
-
-        	<h4><br>Feature Importance</h4>
-        	<p style="text-align: justify"> The features, in this case genes, identified from the support vector machine is then used as input along with the response i.e. breast cancer stages, to fit an <b>extreme gradient boosting</b> model. This model is preferred over other tree based algorithms due to its improved performance in prediction. The cross validated model was found to have high prediction accuracy and lower variances.</p>
-        	<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#FeatImp">
-  			Learn More
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="FeatImp"" tabindex="-1" role="dialog" aria-labelledby="FeatImpTitle" aria-hidden="true">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
-      				<div class="modal-header">
-        				<h5 class="modal-title" id="exampleModalLongTitle">Feature Importance</h5>
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          					<span aria-hidden="true">&times;</span>
-        				</button>
-      				</div>
-      					<div class="modal-body">
-        					<img src="/static/XGBoost_new.png" alt="XGBoost" width="450" height="350" align="center">
-        					<p style="text-align: justify">The final step in the framework is to select significant features, genes, from the non-sparse set of features obtained from the first step. A gradient boosting algorithm is deployed to perform classification of the cancer stages using 5 fold cross validation. The genetic features are then rated based on their importance using f-score and the top contributing features are selected. In the model for every stage, selected features for a particular can be interpreted as the significant molecular targets responsible for classifying a patient of being in that stage. Gradient boosted trees are known have to improved performance over other algorithms in a two class classification with random forests being second best.</p>
-        					<p style="text-align: justify">Gradient boosting trees run sequential algorithm which trains on the weak weak learners with high bias and low variance. In this problem the features contributing to high variance are eliminated in the first step, hence to minimize bias, 'calibrated' gradient boosting trees were selected for classification. The gradient boosting classification was achieved using the python module <code>xgboost</code>.</p>
-      					</div>
-      				<div class="modal-footer">
-
-      				</div>
-    			</div>
-  			</div>
-		</div>
-        </div>
-        <div class="container">
-        	<h3><br>Results</h3>
-        		<p style="text-align: justify">As mentioned earlier, three separate models are built to extract significant genes in each stage of breast cancer. The feature selection done using support vector machine with L1 regularization reduces the feature space from approximately 58000 genes to approximately 15000 genes in all stages. The upsampling of the minority class for models with stage 1 and 2 significantly reduces type II error (false negative rate). The objective of the first step is to drive out the sparse features of the input matrix and to supply the remaining features to the next step of the data pipeline, the gradient boosted model. The gradient boosted model produces a list of important features which are ranked based on their f-scores. Top 500 significant features are extracted using this metric. These features contribute significantly to the prediction power of the model. A snapshot of top 20 genes in stage 2 is shown below. Note that the selected genes listed on the y-axis have the Ensembl Gene IDs.</p>
-        		<div style="display: flex; justify-content: center;">
-        			<img src="/static/FeatureSel_2.png" alt="FeatureSel" width="650" height="500" align="middle">
-        		</div>
-        		<p style="text-align: justify"><br>The top 500 features extracted have F score of 2 or more. For the ease of readability, I have discussed the top 10 features extracted in each stage. The Ensembl Gene IDs for these genes are converted to their gene names and are used here on. Before assessing the genes based on their clinical relevance, it is important to report model performance. As mentioned before, the upsampling reduces the false negative rates which is critical in this problem. We do not want patients who are actually in a malignant stage to be classified as being in an early stage. The figure below shows the gradient boosted model performance in all three stages (stages 3 and 4 were combined).</p>
-        		<img src="/static/ModelAccuracy.png" alt="ModelAccuracy" width="550" height="400" align="left">
-
-        		<p style="text-align: justify">The plot can be interpreted as follows: 
-				<b>Model M1</b> is the probability of a patient of being in one of the three stages based on random chance. 
-				<b>Model M2</b> represents the proportion of occurrence of dominant class in the data. In this dataset, majority of patients were suffering from stage 2 breast cancer and their class proportion was calculated to be 0.69. 
-				<b>Model M3</b> classifies patients in stage 1 or any other stage. The model identifies significant genetic signature for stage 1 only. The model accuracy is 0.81 with 1 patient misclassified as false negative. 
-				<b>Model M4</b> classifies patients being in stage 2 or stage 1. Factoring in the progression of cancer, this model only compares the patients who have been in stage 1 and have progressed to stage 2 to the ones which are currently in stage 1.
-				<b>Model M5</b>, similar to M3, classifies patients in stage 3 or any other benign stage (Stages 1 and 2). The model accuracies of M4 and M5 are 0.77 and 0.72, respectively. The features extracted from the model are shown in the two heat maps below. The heatmap are created by standardizing the gene expression values of the top 10 genes across each stage.<br><br></p>
-        		<div style="display: flex; justify-content: center;">
-        			<img src="/static/HeatMap_Result2_new.png" alt="HeatMap_Result2" width="550" height="500" align="right">
-        			<img src="/static/HeatMap_Result1_new.png" alt="HeatMap_Result1" width="625" height="500" align="left">
-        			</div>
-        		<p style="text-align: justify"><br>The heat maps tell two differtent but very compelling stories. The heat map on the left shows top significant features for every stage. The y-axis represent the gene names and the x-axis shows the three stages of breast cancer. The standardized expression values are color coded based on their expression values; darker the color, higher is the gene expression. The genes are grouped according to their significance in each stage and the labels on the left represent this information. For instance, genes, NME6, AC097359.2, RNF212B and, AC000036.1, represent the top significant genes for stage 1 where these are highly expressed as can be seen from the top left corner of the heat map. A similar pattern is evident in stages 2 and 3. These set of genes form the genetic signature which help predict a particular cancer stage. As can be seen from the heat map, the expression levels for above mentioned genes vary across stages.
-        		Note that the popular genes known to be associated with breast cancer, BRCA1 and BRCA2, are not identified as significant features by the framework. This is due to the nature of the response variable, i.e. cancer stage. Absence of gene expression profile on healthy patients in cancer research results in the selection of only the features that distinguish between different stages of cancer and not between healthy individuals and cancer patients.
-        		Gene signature sets generated using this approach could be of great commercial value. Analysis of gene expression of a limited set of genes rather than extensive gene expression profiling can save time and resources.
-        		The heat map on the left shows gene sets characterizing each breast cancer stage and can be used as reference guide by clinicians for classifying patients based on the advancement of the disease.
-        		Gene sets obtained by this approach can be included in breast cancer screening programs to prevent patients from going into invasive stages since it is able to identify genes significant to stage 2.The disease progression can also be predicted with the above-mentioned approach (refer to heat map on the right). For example, gene AC093799.1 is a predictor of stage 2.  If a patient is assigned to stage 1 based on gene set in heat map on left and has high expression of AC093799.1, there is high probability that he/she will soon progress to stage 2. Thus, the two gene sets generated here can aid clinicians in early detection and prognosis with limited resources.
-
-        		<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-					  Sample Case
-					</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLongTitle">Sample Case-NME6</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        <img src="/static/NME6_new.png" alt="NME6" width="350" height="400" align="center">
-					        <p style="text-align: justify">As mentioned earlier, the genes selected by the models are 'subtle' genetic signatures significant to a particular breast cancer stage which are different from the already known molecular targets in breast cancer. In order to test the validity of the model, let's look at one example. NME6 is a protein coding gene which includes nucleoside diphosphate kinase activity. It has been known to have upregulated levels in patient samples for diseases such as ovarian cancer, neuroblastoma and hematological malignancies. It is also found in drug metabolism of fluorouracil, used in chemotherapy and has known usage to treat cervical, colon, esophageal, pancreatic cancer. It can be seen from the figure that this gene also has upregulated levels in breast cancer.</p>
-					        <div style="display: flex; justify-content: center;">
-					        	<img src="/static/NME6_2.png" alt="NME6" width="200" height="200" align="center">
-					        </div>
-					        <p style="text-align: justify">Moreover, around 30% of patients show cytoplasmic positivity in breast cancer as seen in figure above. This corroborates the claim that the model identifies the subtle molecular signatures which help predict breast cancer stages.</p>
-					      </div>
-					      <div class="modal-footer">
-
-					      </div>
-					    </div>
-					  </div>
-					</div>
-
-        </div>
-        <div class="container">
-					<h3><br>Conclusion and Improvements</h3>
-					<p style="text-align: justify">This blog discusses a machine learning approach to aid identification of breast cancer stages by combining gene expression and clinical data. There is sufficient evidence which shows the model performs to a reasonable degree to identify some of the significant genes in every stage of breast cancer. Considering data science never stops and that there is always room for improvement, some of the future work would involve extracting more features from the model. These extracted features can then be used to perform a pathway analysis to identify significant pathways which could be potentially targeted for drug development.</p>
-				</div>
-       		<div style="display: flex; justify-content: center;">
-       			<p><br></p>
-        		<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTZ5KfYgZHMvAxY37xaCrFAbyWVqoKa7rU2Z0Iv-_lYpTDt3da94_DiTh7PWFubLphbQfHeTIcXylyk/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-        	</div>
-
-     </div>
-         <footer>
-  		<p><font size="2.5"><br>Posted by: Nilabh Ohol</p>
-  		<p>Contact information: <a href="mailto:someone@example.com">
-  		nilabh.ohol@mavs.uta.edu</a>.</p>
-  		<p style="text-align: justify">Author info: Nilabh is working on his PhD focussing on applied statistics from the Deaprtment of Industrial, Manufacturing and Systems Engineering at the University of Texas at Arlington. His interests are statisitics, machine learning, deep learning, integer programming and time series. He is also an avid soccer fan and loves to be outdoors when he is not working.<br></p>
-	</footer>
+    <div class="container">
+      <div>
+      </div>
+      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="static/js/bootstrap.min.js"></script>
     </div><!-- /.container -->
 
-    <p class="ex1"></p>
-    <p class="ex1"></p>
-    <p class="ex1"></p>
-    <p class="ex1"></p>
 
 
-        <!-- Bootstrap core JavaScript
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </body>
-
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

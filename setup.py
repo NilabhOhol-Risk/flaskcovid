@@ -46,7 +46,7 @@ REQUIREMENTS = [
     'uszipcode',
     'xlrd',
     'xmltodict',
-    'PureCloudPlatformClientV2',
+    'PureCloudPlatformClientV2'
 ]
 
 
