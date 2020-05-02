@@ -1,11 +1,17 @@
 
-from flask import Flask, render_template
+from flask import (
+    Flask,
+    render_template,
+    request,
+    flash
+    )
 import pandas as pd
+from test_function import test_function
+from forms import InputForm
 
-df = pd.read_csv('https://data.boston.gov/dataset/c8b8ef8c-dd31-4e4e-bf19-af7e4e0d7f36/resource/29e74884-a777-4242-9fcc-c30aaaf3fb10/download/economic-indicators.csv',
-                 parse_dates=[['Year', 'Month']])
-length = len(df)
+
 app = Flask(__name__)
+app.secret_key = 'sdfjsbs'
 
 @app.route('/')
 @app.route('/main')
@@ -13,30 +19,32 @@ def main():
     user = { 'nickname': 'COSMOS' } # fake user
     return render_template('main.html',
                             user = { 'nickname': 'COSMOS' },
-                            length=length,
-                            dataframe=df.to_html())
+                            title = 'Home'
+                            )
 
 @app.route('/index')
 def index():
 	return render_template("index.html",
        title = 'Index')
 
-@app.route('/input')
-def input():
-    return render_template("input.html",
-        title = 'Input')
 
-@app.route('/output')
-def output():
-    return render_template("output.html",
-        title = 'Output')
+@app.route('/input/output',methods=['GET', 'POST'])
+@app.route('/input',methods=['GET', 'POST'])
+def input():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        output = test_function(form.input1.data, form.input2.data)
+        return render_template("output.html", output=output
+                                ,title = 'Output')
+    else:
+        flash('Please enter a valid value', 'danger')
+        return render_template("input.html", form=form
+                                ,title = 'Input')
 
 @app.route('/data')
 def data():
     return render_template("data.html",
         title = 'Data')
-
-
 
 
 if __name__ == '__main__':
